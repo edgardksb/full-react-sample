@@ -1,15 +1,10 @@
 from django.contrib import admin
 
-from .models import MedicalSpecialty, Doctor
+from .models import UserMobile
 
 
-class MedicalSpecialtyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-
-class DoctorAdmin(admin.ModelAdmin):
+class UserMobileAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'email')
 
 
-admin.site.register(MedicalSpecialty, MedicalSpecialtyAdmin)
-admin.site.register(Doctor, DoctorAdmin)
+admin.site.register(UserMobile, UserMobileAdmin)

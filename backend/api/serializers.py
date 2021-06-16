@@ -1,15 +1,9 @@
 from rest_framework import serializers
 
-from .models import MedicalSpecialty, Doctor
+from .models import UserMobile
 
 
-class MedicalSpecialtySerializer(serializers.HyperlinkedModelSerializer):
+class UserMobileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = MedicalSpecialty
-        fields = ('id', 'name')
-
-
-class DoctorSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Doctor
-        fields = ('id', 'name', 'email', 'phone', 'medicalspecialty')
+        model = UserMobile
+        fields = ('id', 'name', 'email', 'phone', 'token')

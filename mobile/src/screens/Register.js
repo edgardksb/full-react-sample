@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Button, Alert} from 'react-native';
 import {TextInput, Headline} from 'react-native-paper';
 
-import MedicalSpecialtyChip from './MedicalSpecialtyChip';
 import axios from 'axios';
 import {server} from '../common';
 
+import {useAuthorization} from '../components/AuthProvider';
+
 const Register = props => {
   const [user, setUserState] = useState({});
+  const {signIn} = useAuthorization();
+
   const createAccount = async () => {
     if (!user) {
       Alert.alert('Invalid registration :(');
@@ -22,19 +25,18 @@ const Register = props => {
       Alert.alert('Invalid email');
     } else if (!user.cellphone || user.cellphone.trim().length < 5) {
       Alert.alert('Invalid cell phone');
-    } else if (!user.medicalspecialty) {
-      Alert.alert('Invalid medical specialty');
     } else {
       try {
         const jsonPost = {
           name: user.name,
           email: user.email,
           phone: user.cellphone,
-          medicalspecialty: `${server}/medicalspecialtys/${user.medicalspecialty}/`,
         };
-        console.log(jsonPost);
-        const response = await axios.post(`${server}/doctors/`, jsonPost);
+        const response = await axios.post(`${server}/usermobiles/`, jsonPost);
         if (response.status < 300) {
+          const newUser = response.data;
+          signIn(newUser.token);
+          props.navigation.navigate('Welcome');
         } else {
           Alert.alert('Invalid registration ;(');
         }
@@ -63,11 +65,6 @@ const Register = props => {
         onChangeText={text =>
           setUserState(Object.assign(user, {cellphone: text}))
         }
-      />
-      <MedicalSpecialtyChip
-        onChangeChip={index => {
-          setUserState(Object.assign(user, {medicalspecialty: index}));
-        }}
       />
       <Button title="Create account" onPress={createAccount} />
     </View>
