@@ -29,12 +29,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if env.str('ENV') == 'production':
-    DEBUG = False
-    ALLOWED_HOSTS = ['full-react-sample.edgardksb.com']
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = []
+DEBUG = True
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -48,16 +44,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'healthz',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'healthz.middleware.HealthCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'full-react-sample.urls'
@@ -165,3 +165,9 @@ PASSWORD_HASHERS = (
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+HEALTHCHECK = {
+    'READINESS_CHECKS': ('databases', 'caches', 'queues',)
+}
+
+CORS_ALLOW_ALL_ORIGINS = True

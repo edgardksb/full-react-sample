@@ -2,3 +2,5 @@ djangorestframework
 gunicorn
 psycopg2-binary
 django-environ
+django-healthz
+django-cors-headers

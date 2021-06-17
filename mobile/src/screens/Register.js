@@ -33,6 +33,7 @@ const Register = props => {
           phone: user.cellphone,
         };
         const response = await axios.post(`${server}/usermobiles/`, jsonPost);
+        console.log(response.status);
         if (response.status < 300) {
           const newUser = response.data;
           signIn(newUser.token);
@@ -41,6 +42,7 @@ const Register = props => {
           Alert.alert('Invalid registration ;(');
         }
       } catch (err) {
+        console.log(err, server);
         Alert.alert('Invalid registration ;(');
       }
     }

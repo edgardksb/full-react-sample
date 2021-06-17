@@ -1,6 +1,11 @@
 # full-react-sample
 
 This is a full react mobile App sample using Django in backend and PostgreSQL database.
+Created the following endpoint's in the backend:
+* Public endpoint for user creation
+    * This endpoint returns a token for authentication of private endpoints
+* Endpoint privado para pesquisa dos dados do usuario cadastrado
+    * It is not possible to query data from another user other than the Token user
 
 ## Use backend
 In `backend` directory create the `.env` file using config below:
@@ -47,7 +52,7 @@ docker push gcr.io/$GCP_PROJECT_ID/full-react-sample
 ```
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step5.png?raw=true)
 
-### Step6: Configure Workload, Service and Load Balance
+### Step6: Configure Workload, Service and Ingress
 On Google Cloud I configure all components to make the docker application run in the safest way using Google Cloud edge services.
 This way it is accessible to the mobile app
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step61.png?raw=true)
@@ -55,6 +60,20 @@ This way it is accessible to the mobile app
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step63.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step64.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step65.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step66.png?raw=true)
 
 ### Step7: DNS
 Created DNS record to point to Google Load Balance IP
+
+## Use the mobile APP
+
+Enter the backend connection address in the file `mobile/src/common.js`
+Start using react-native.
+```
+cd mobile
+npm install
+npx pod-install ios
+npx react-native run-ios
+```
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/screen1.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/screen2.png?raw=true)
