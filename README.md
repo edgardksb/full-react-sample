@@ -22,12 +22,16 @@ Steps taken to deploy this application in Google Cloud (GCP).
 For application security, I configure this NAT.
 Thus, all external connections of the application will go through a NAT gateway leaving through an IP managed by Google.
 This way the application is masked and cannot be discovered.
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step1.png?raw=true)
 
 ### Step2: Cluster Kubernetes
 Also with security in mind, a private Kubernetes Cluster was created.
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step21.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step22.png?raw=true)
 
 ### Step3: Cloud SQL
 Instantiate Cloud SQL with PostgreSQL only with private access without public IP
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step3.png?raw=true)
 
 ### Step4: Bastion Host
 Accessed the PostgreSQL instance of the Cloud SQL through a bastion host and executed the SQL to create the tables.
@@ -41,10 +45,16 @@ docker build -t full-react-sample .
 docker tag full-react-sample gcr.io/$GCP_PROJECT_ID/full-react-sample
 docker push gcr.io/$GCP_PROJECT_ID/full-react-sample
 ```
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step5.png?raw=true)
 
 ### Step6: Configure Workload, Service and Load Balance
 On Google Cloud I configure all components to make the docker application run in the safest way using Google Cloud edge services.
 This way it is accessible to the mobile app
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step61.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step62.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step63.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step64.png?raw=true)
+![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step65.png?raw=true)
 
 ### Step7: DNS
 Created DNS record to point to Google Load Balance IP
