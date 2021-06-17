@@ -1,10 +1,11 @@
 # full-react-sample
 
 This is a full react mobile App sample using Django in backend and PostgreSQL database.
+
 Created the following endpoint's in the backend:
 * Public endpoint for user creation
     * This endpoint returns a token for authentication of private endpoints
-* Endpoint privado para pesquisa dos dados do usuario cadastrado
+* Private endpoint for searching registered user data
     * It is not possible to query data from another user other than the Token user
 
 ## Use backend
@@ -15,17 +16,17 @@ DEFAULT_HOSTNAME=
 DEFAULT_DATABASE=
 DEFAULT_USER=
 DEFAULT_PASSWORD=
-SECRET_KEY=
+SECRET_KEY=DJANGO_SECRET_KEY
 ```
-After run the SQL content that is in `backend/sql.txt` in your PostgreSQL instance.
-To run just use the docker with `build.sh` and `run.sh` commands, inside the `backend` directory
+Run the SQL content that is in `backend/sql.txt` in your PostgreSQL instance.
+To run backend service use the docker with `build.sh` and `run.sh` commands, inside the `backend` directory
 
 ## Deploy
 Steps taken to deploy this application in Google Cloud (GCP).
 
 ### Step1: Cloud NAT
 For application security, I configure this NAT.
-Thus, all external connections of the application will go through a NAT gateway leaving through an IP managed by Google.
+All external connections of the application will go through a NAT gateway leaving through an IP managed by Google.
 This way the application is masked and cannot be discovered.
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step1.png?raw=true)
 
@@ -35,7 +36,7 @@ Also with security in mind, a private Kubernetes Cluster was created.
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step22.png?raw=true)
 
 ### Step3: Cloud SQL
-Instantiate Cloud SQL with PostgreSQL only with private access without public IP
+Created Cloud SQL with PostgreSQL only with private access without public IP
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step3.png?raw=true)
 
 ### Step4: Bastion Host
@@ -54,7 +55,7 @@ docker push gcr.io/$GCP_PROJECT_ID/full-react-sample
 
 ### Step6: Configure Workload, Service and Ingress
 On Google Cloud I configure all components to make the docker application run in the safest way using Google Cloud edge services.
-To use ingress I configured a load balance with SSL termination.
+In the ingress I configured a load balance with SSL termination.
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step61.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step62.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step63.png?raw=true)
@@ -63,7 +64,7 @@ To use ingress I configured a load balance with SSL termination.
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step66.png?raw=true)
 
 ### Step7: DNS
-Created DNS record to point to Google Load Balance IP
+Created DNS record to point to Google Global Load Balance IP
 
 ## Use the mobile APP
 
