@@ -67,8 +67,8 @@ Created DNS record to point to Google Load Balance IP
 
 ## Use the mobile APP
 
-Enter the backend connection address in the file `mobile/src/common.js`
-For testing purposes the API is working at the address `https://fullreactsample.edgardksb.com/`
+Enter the backend connection address in the file `mobile/src/common.js`.
+For testing purposes the API is working at the address https://fullreactsample.edgardksb.com/
 
 Start using react-native.
 ```
