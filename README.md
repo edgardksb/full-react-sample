@@ -54,7 +54,7 @@ docker push gcr.io/$GCP_PROJECT_ID/full-react-sample
 
 ### Step6: Configure Workload, Service and Ingress
 On Google Cloud I configure all components to make the docker application run in the safest way using Google Cloud edge services.
-This way it is accessible to the mobile app
+To use ingress I configured a load balance with SSL termination.
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step61.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step62.png?raw=true)
 ![alt text](https://github.com/edgardksb/full-react-sample/blob/main/img/step63.png?raw=true)
@@ -68,6 +68,8 @@ Created DNS record to point to Google Load Balance IP
 ## Use the mobile APP
 
 Enter the backend connection address in the file `mobile/src/common.js`
+For testing purposes the API is working at the address `https://fullreactsample.edgardksb.com/`
+
 Start using react-native.
 ```
 cd mobile
